@@ -9,18 +9,24 @@ function print(text) {
  * Эту функцию нужно поменять так,
  * чтобы функция sayHello работала корректно
  */
- function isValid(name) {
-  
-  let result = '';
-  let strLenght = name.length;
-  let checkName = name.includes(' '); //прверка на наличие пробела
+function isValid(name) {
 
-  if (strLenght >= 4 && !checkName) {
-    
-    result = name;
-     
+  let result = '';
+
+  if (name) {
+
+    let strLength = name.length
+
+    let checkName = name.includes(' '); //прверка на наличие пробела
+
+    if (strLength >= 4 && !checkName) {
+
+      result = name;
+
+    }
+
   }
-  
+
   return result;
 
 }
