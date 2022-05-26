@@ -11,7 +11,7 @@ function print(text) {
  */
 function isValid(name) {
 
-  let result = '';
+  let result = false;
 
   if (name) {
 
@@ -21,7 +21,7 @@ function isValid(name) {
 
     if (strLength >= 4 && !checkName) {
 
-      result = name;
+      result = true;
 
     }
 
@@ -30,6 +30,7 @@ function isValid(name) {
   return result;
 
 }
+
 
 
 
