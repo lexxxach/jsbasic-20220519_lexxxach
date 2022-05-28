@@ -1,10 +1,10 @@
 function isEmpty(obj) {
-  let result = false;
+  let result = true;
 
   let numProp = Object.keys(schedule).length;
 
   if (numProp) {
-    result = true;
+    result = false;
   }
 
   return result;
