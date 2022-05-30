@@ -1,3 +1,11 @@
 function isEmpty(obj) {
-  // ваш код...
+  let result = true;
+
+  let numProp = Object.keys(obj).length;
+
+  if (numProp) {
+    result = false;
+  }
+
+  return result;
 }
