@@ -44,7 +44,7 @@ function highlight(table) {
       
       if (status == 'true') {
         res = 'available'
-      } else {
+      } else if(status == 'false'){
         res = 'unavailable'
       }
 
@@ -59,10 +59,21 @@ function highlight(table) {
 
     //обработка статус
 
+     alert(currentRow.classList.length)
+    
+   if(elStatus.classList.length){
+    
+     alert(23423)
+     
+     
+   }
+    
+    
+    
     
     if (Boolean (elStatus.dataset.available)) {
      // alert(propStatus(elStatus.dataset.available))
-      currentRow.className = propStatus(elStatus.dataset.available)
+      currentRow.classList.add(propStatus(elStatus.dataset.available)) 
     } else {
       currentRow.setAttribute('hidden', true)
     }
@@ -71,12 +82,15 @@ function highlight(table) {
    
     //alert(currentRow.classList.length)
      
- if(currentRow.classList.length) {
-   currentRow.classList.add(propGender(elGender.textContent))
+    
+    
+    currentRow.classList.add(propGender(elGender.textContent))
 
    
- }   
+    
     
   }
+  
+//  alert(Boolean(null))
 
 }
