@@ -69,7 +69,9 @@ function highlight(table) {
 
     //обработка пол
    
- if(currentRow.classList) {
+    //alert(currentRow.classList.length)
+     
+ if(currentRow.classList.length) {
    currentRow.classList.add(propGender(elGender.textContent))
 
    
