@@ -3,7 +3,7 @@ function showSalary(users, age) {
 
   let strArr = users.filter(item => item.age <= age)
 
-  let resStr = ''
+  //let resStr = '' - Устранение замечаний
 
   res = strArr.map(function (item, ind, arr) {
 
