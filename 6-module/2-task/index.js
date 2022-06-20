@@ -39,7 +39,7 @@ export default class ProductCard {
       
       let elBtn = elem.getElementsByClassName('card__button')[0]
       let userEvent = new CustomEvent('product-add',{
-        detail: prod.id,
+        detail: this.product.id,
         bubbles: true
       }
                 
