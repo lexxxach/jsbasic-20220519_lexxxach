@@ -22,7 +22,7 @@ export default class Carousel {
   </div>`
     )
 
-    alert(elem.innerHTML)
+   
 
     for (let slide of this.slides) {
 
@@ -77,35 +77,40 @@ export default class Carousel {
     let elBtnL = elem.getElementsByClassName('carousel__arrow carousel__arrow_left')[0]
     let elBtnR = elem.getElementsByClassName('carousel__arrow carousel__arrow_right')[0]
   
+    
     let chClick = 0
-    checkShow(chClick, elBtnR, elBtnL)
+   checkShow(chClick, elBtnR, elBtnL, this.length)
   
     elBtnL.addEventListener('click', () => {
       if (chClick > 0) {
         let elCarousel = elem.getElementsByClassName('carousel__inner')[0]
         chClick -= 1
         elCarousel.style.transform = `translateX(-${chClick * elCarousel.offsetWidth}px  )`
-        checkShow(chClick, elBtnR, elBtnL)
+        checkShow(chClick, elBtnR, elBtnL,this.slides.length)
       }
     })
   
     elBtnR.addEventListener('click', () => {
-      if (chClick < 3) {
+      if (chClick < this.slides.length-1) {
         chClick += 1
         let elCarousel = elem.getElementsByClassName('carousel__inner')[0]
         elCarousel.style.transform = `translateX(-${chClick * elCarousel.offsetWidth}px  )`
-        checkShow(chClick, elBtnR, elBtnL)
+        checkShow(chClick, elBtnR, elBtnL,this.slides.length)
       }
     })
   
-    function checkShow(chClick, elR, elL) {
+    function checkShow(chClick, elR, elL, length) {
+     
       switch (chClick) {
         case 0:
           elL.style.display = 'none'
+          elR.style.display = ''
           break
   
-        case 3:
+        case length-1:
           elR.style.display = 'none'
+          elL.style.display = ''
+         
           break
         default:
           elR.style.display = ''
