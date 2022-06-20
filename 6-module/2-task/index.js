@@ -5,7 +5,7 @@ export default class ProductCard {
     this.elem = this.#elem(product)
   }
 
-  #elem(prod){
+  #elem(prod) {
     let elem = createElement(
       `<div class="card">
       <div class="card__top">
@@ -21,36 +21,38 @@ export default class ProductCard {
   </div>`
     )
 
-      let elPrice = elem.getElementsByClassName('card__price')[0]
-      elPrice.textContent = '€' + prod.price.toFixed(2)
+    let elPrice = elem.getElementsByClassName('card__price')[0]
+    elPrice.textContent = '€' + prod.price.toFixed(2)
 
-      let elImg = elem.getElementsByClassName('card__image')[0]
-      elImg.src = `../../assets/images/products/${prod.image}`
+    let elImg = elem.getElementsByClassName('card__image')[0]
+    elImg.src = `../../assets/images/products/${prod.image}`
 
-      let elName = elem.getElementsByClassName('card__title')[0]
-      elName.textContent = prod.name
+    let elName = elem.getElementsByClassName('card__title')[0]
+    elName.textContent = prod.name
 
-      alert(prod.id)
+    let elBtn = elem.getElementsByClassName('card__button')[0]
+
+    elBtn.addEventListener('click', function () {
       
-      elem.addEventListener('product-add',function(event){
-
-        
-
-      })
-      
-      let elBtn = elem.getElementsByClassName('card__button')[0]
-      let userEvent = new CustomEvent('product-add',{
+      let userEvent = new CustomEvent('product-add', {
         detail: prod.id,
         bubbles: true
       }
-                
-      )
 
+      )
+      
       elBtn.dispatchEvent(userEvent)
 
-      
+    })
+
+
+
+
+
+
+
     return elem
   }
 
-  
+
 }
