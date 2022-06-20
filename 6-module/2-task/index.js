@@ -27,6 +27,9 @@ export default class ProductCard {
       let elImg = elem.getElementsByClassName('card__image')[0]
       elImg.src = `../../assets/images/products/${prod.image}`
 
+      let elName = elem.getElementsByClassName('card__title')[0]
+      elName.textContent = prod.name
+
       
       elem.addEventListener('product-add',function(event){
 
