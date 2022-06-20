@@ -30,6 +30,7 @@ export default class ProductCard {
       let elName = elem.getElementsByClassName('card__title')[0]
       elName.textContent = prod.name
 
+      alert(prod.id)
       
       elem.addEventListener('product-add',function(event){
 
@@ -39,7 +40,7 @@ export default class ProductCard {
       
       let elBtn = elem.getElementsByClassName('card__button')[0]
       let userEvent = new CustomEvent('product-add',{
-        detail: this.product.id,
+        detail: prod.id,
         bubbles: true
       }
                 
