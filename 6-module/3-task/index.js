@@ -20,10 +20,45 @@ export default class Carousel {
     </div>
 
     
-${this.#elemsInner()}      
+    ${this.#elemsInner()}
+    
+    
+    
+    
+    
+      
     
   </div>`
     )
+
+    alert(elem.innerHTML)
+
+    for (let slide of this.slides) {
+
+      let elDiv = elem.querySelector(`[data-id="${slide.id}"]`)
+     
+     let btn = elDiv.getElementsByClassName('carousel__button')[0]
+
+     btn.addEventListener('click',function(){
+
+      let userEvent = new CustomEvent('product-add',{
+        detail: slide.id,
+        bubbles:true
+      })
+
+      btn.dispatchEvent(userEvent)
+
+
+     })
+
+
+    }
+
+
+      
+
+
+
     return elem
   }
 
@@ -38,7 +73,7 @@ ${this.#elemsInner()}
        for (let slide of this.slides){
 
         let elSlide = createElement(
-          `<div class="carousel__slide" data-id="penang-shrimp">
+          `<div class="carousel__slide" data-id="${slide.id}">
           <img src="/assets/images/carousel/${slide.image}" class="carousel__img" alt="slide">
           <div class="carousel__caption">
           <span class="carousel__price">€${slide.price.toFixed(2)}<!--значение slide.price--></span>
@@ -50,7 +85,16 @@ ${this.#elemsInner()}
           </div>
          `
           ) 
+
+        
+
+
         elemCarousel.append(elSlide)
+      
+       /*  let btn = elSlide.querySelector('BUTTON')
+        alert(btn)
+        btn.onclick= ()=>alert(2323) */
+
       } 
       return elemCarousel.outerHTML
   }
