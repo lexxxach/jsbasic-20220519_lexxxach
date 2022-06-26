@@ -13,27 +13,27 @@ export default class Modal {
     let elemBody = document.querySelector('BODY')
     elemBody.classList.add('is-modal-open')
     let elemContainer = document.querySelector('.container')
-    elemContainer.append(elemNew)
+    elemContainer.after(elemNew)
 
-    let btnClose = elemNew.querySelector('.modal__close')
+  //  let btnClose = elemNew.querySelector('.modal__close')
     
     /* удаление обработчика по ESC */
-    btnClose.addEventListener('click', () => {
+    /* btnClose.addEventListener('click', () => {
       this.#closeModal(elemNew)
 
       document.removeEventListener('keydown', this.#closeModalEsc)
     })
-
+ */
     /* ЗАкрытие модального окна */
-    document.addEventListener('keydown', this.#closeModalEsc, { once: true })
+//    document.addEventListener('keydown', this.#closeModalEsc, { once: true })
 
   }
 
-  setTitle(modalTitle) {
+ /*  setTitle(modalTitle) {
     let elemNew = this.#elem
     let elemModaTitle = elemNew.querySelector('.modal__title')
     elemModaTitle.textContent = modalTitle
-  }
+  } */
 
   /* Получение корневого эелемента */
   #getInnerElem() {
@@ -71,30 +71,30 @@ export default class Modal {
 
   }
 
-  setBody(elemWindow) {
+ /*  setBody(elemWindow) {
 
     let modalBody = this.#elem.querySelector('.modal__body')
     modalBody.innerHTML = elemWindow.innerHTML
 
   }
-
-  close() {
+ */
+ /*  close() {
     let elModal = document.querySelector('.modal')
     this.#closeModal(elModal)
     document.removeEventListener('keydown', this.#closeModalEsc)
-  }
+  } */
 
   /* Закрытие модального окна по внутреннему методуи закрывающей кнопке */
-  #closeModal(elemModal) {
+  /* #closeModal(elemModal) {
 
     elemModal.closest('BODY').classList.remove('is-modal-open')
 
     elemModal.remove()
 
   }
-
+ */
   /* Обработчик закрытия по ESC кнопке */
-  #closeModalEsc(event) {
+ /*  #closeModalEsc(event) {
 
     let elemModal = document.querySelector('.modal')
     if (!elemModal) {
@@ -105,5 +105,5 @@ export default class Modal {
       elemModal.remove()
     }
   }
-
+ */
 }
