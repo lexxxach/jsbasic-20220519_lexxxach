@@ -2,17 +2,18 @@ import createElement from '../../assets/lib/create-element.js';
 
 export default class Modal {
   
-  #elem = ''
+  #elem = this.#getInnerElem()
 
   constructor() {
-    this.#elem = this.#getInnerElem()
+    //this.#elem = this.#getInnerElem()
   }
 
   open() {
     let elemNew = this.#elem
     let elemBody = document.querySelector('BODY')
     elemBody.classList.add('is-modal-open')
-    elemBody.prepend(elemNew)
+    let elemContainer = document.querySelector('.container')
+    elemContainer.after(elemNew)
 
     let btnClose = elemNew.querySelector('.modal__close')
     
