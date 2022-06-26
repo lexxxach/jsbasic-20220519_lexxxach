@@ -19,6 +19,7 @@ export default class RibbonMenu {
       btnL.classList.remove('ribbon__arrow_visible')
       btnR.classList.add('ribbon__arrow_visible')
 
+      
     }
 
     let direction = this.#scrollMenu
