@@ -13,7 +13,7 @@ export default class Modal {
     let elemBody = document.querySelector('BODY')
     elemBody.classList.add('is-modal-open')
     let elemContainer = document.querySelector('.container')
-    elemContainer.after(elemNew)
+    elemContainer.append(elemNew)
 
     let btnClose = elemNew.querySelector('.modal__close')
     
@@ -89,7 +89,7 @@ export default class Modal {
 
     elemModal.closest('BODY').classList.remove('is-modal-open')
 
-   // elemModal.remove()
+    elemModal.remove()
 
   }
 
