@@ -10,13 +10,14 @@ export default class Modal {
     let elem = this.elem
     let elemBody = document.querySelector('BODY')
     elemBody.classList.add('is-modal-open')
-    elemBody.append(elem)
+    elemBody.prepend(elem)
 
     let btnClose = elem.querySelector('.modal__close')
     
     /* удаление обработчика по ESC */
     btnClose.addEventListener('click', () => {
       this.#closeModal(elem)
+
       document.removeEventListener('keydown', this.#closeModalEsc)
     })
 
