@@ -30,9 +30,10 @@ export default class Modal {
   }
 
   setTitle(modalTitle) {
-    /* let elemNew = this.#elem
+    let elemNew = this.#elem
     let elemModaTitle = elemNew.querySelector('.modal__title')
-    elemModaTitle.textContent = modalTitle */
+    elemModaTitle.textContent = modalTitle
+    
   }
 
   /* Получение корневого эелемента */
@@ -73,8 +74,8 @@ export default class Modal {
 
   setBody(elemWindow) {
 
-    /* let modalBody = this.#elem.querySelector('.modal__body')
-    modalBody.innerHTML = elemWindow.innerHTML */
+    let modalBody = this.#elem.querySelector('.modal__body')
+    modalBody.innerHTML = elemWindow.innerHTML
 
   }
 
