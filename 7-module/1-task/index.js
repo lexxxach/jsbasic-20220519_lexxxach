@@ -77,7 +77,12 @@ export default class RibbonMenu {
         detail: {id:elemCurrent.dataset.id},
         bubbles: true
       }
+
+    
+
       )
+
+      elemCurrent.dispatchEvent(eventRibbonSelect)
 
     })
 
