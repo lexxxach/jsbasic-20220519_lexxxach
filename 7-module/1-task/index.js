@@ -76,6 +76,7 @@ export default class RibbonMenu {
         'ribbon-select', {
         detail: cat[elemCurrent.dataset.id],
         bubbles: true
+        
       }
 
     
