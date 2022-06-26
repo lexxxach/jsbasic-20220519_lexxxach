@@ -29,11 +29,11 @@ export default class Modal {
 
   }
 
- /*  setTitle(modalTitle) {
-    let elemNew = this.#elem
+  setTitle(modalTitle) {
+    /* let elemNew = this.#elem
     let elemModaTitle = elemNew.querySelector('.modal__title')
-    elemModaTitle.textContent = modalTitle
-  } */
+    elemModaTitle.textContent = modalTitle */
+  }
 
   /* Получение корневого эелемента */
   #getInnerElem() {
@@ -71,13 +71,13 @@ export default class Modal {
 
   }
 
- /*  setBody(elemWindow) {
+  setBody(elemWindow) {
 
-    let modalBody = this.#elem.querySelector('.modal__body')
-    modalBody.innerHTML = elemWindow.innerHTML
+    /* let modalBody = this.#elem.querySelector('.modal__body')
+    modalBody.innerHTML = elemWindow.innerHTML */
 
   }
- */
+
  /*  close() {
     let elModal = document.querySelector('.modal')
     this.#closeModal(elModal)
