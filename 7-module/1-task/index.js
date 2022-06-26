@@ -13,6 +13,7 @@ export default class RibbonMenu {
     let btnR = elem.querySelector('button.ribbon__arrow_right')
     let elemMenu = elem.querySelector('.ribbon__inner')
 
+
     if (!elemMenu.scrollLeft) {
 
       btnL.classList.remove('ribbon__arrow_visible')
@@ -22,18 +23,21 @@ export default class RibbonMenu {
 
     let direction = this.#scrollMenu
 
+    /* Обработка клика левой кнопки меню */
     btnL.addEventListener('click', function () {
 
       direction('back', elem)
 
     })
 
+    /* Обработка правой кнопки меню */
     btnR.addEventListener('click', function () {
 
       direction('forvard', elem)
 
     })
 
+    /* Обработчик прокрутки */
     elemMenu.addEventListener('scroll', () => {
 
       /* Управление видимостью кнопок */
@@ -48,6 +52,29 @@ export default class RibbonMenu {
         btnL.classList.add('ribbon__arrow_visible')
         btnR.classList.add('ribbon__arrow_visible')
       }
+
+    })
+
+    /* Обработчик выбора категории */
+    elemMenu.addEventListener('click', function (event) {
+
+      this.preventDefault = false
+      let elemCurrent = event.target
+
+      /* Удаление подсветки активной категории */
+      let elemBefore = elemMenu.querySelector('.ribbon__item_active')
+      elemBefore.classList.remove('ribbon__item_active')
+
+      /* Добавление подсветки для активного элемента */
+      elemCurrent.classList.add('ribbon__item_active')
+
+      /* Генерация пользовательского события */
+      let eventRibbonSelect = new CustomEvent(
+        'ribbon-select', {
+        detail: elemCurrent.dataset.id,
+        bubbles: true
+      }
+      )
 
     })
 
