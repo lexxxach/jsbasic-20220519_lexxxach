@@ -89,7 +89,7 @@ export default class Modal {
 
     elemModal.closest('BODY').classList.remove('is-modal-open')
 
-    elemModal.remove()
+   // elemModal.remove()
 
   }
 
