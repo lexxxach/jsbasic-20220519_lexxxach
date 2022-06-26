@@ -87,6 +87,8 @@ export default class Modal {
   /* Закрытие модального окна по внутреннему методуи закрывающей кнопке */
   #closeModal(elemModal) {
 
+    elemModal.closest('BODY').classList.remove('is-modal-open')
+
     elemModal.remove()
 
   }
