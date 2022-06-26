@@ -19,7 +19,7 @@ export default class RibbonMenu {
       btnL.classList.remove('ribbon__arrow_visible')
       btnR.classList.add('ribbon__arrow_visible')
 
-      
+
     }
 
     let direction = this.#scrollMenu
@@ -69,10 +69,12 @@ export default class RibbonMenu {
       /* Добавление подсветки для активного элемента */
       elemCurrent.classList.add('ribbon__item_active')
 
+      alert(elemCurrent.dataset.id)
+
       /* Генерация пользовательского события */
       let eventRibbonSelect = new CustomEvent(
         'ribbon-select', {
-        detail: elemCurrent.dataset.id,
+        detail: {id:elemCurrent.dataset.id},
         bubbles: true
       }
       )
