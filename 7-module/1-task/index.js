@@ -74,17 +74,12 @@ export default class RibbonMenu {
       /* Генерация пользовательского события */
       let eventRibbonSelect = new CustomEvent(
         'ribbon-select', {
-        detail: cat[elemCurrent.dataset.id],
-        bubbles: true
-        
-      }
+        detail: elemCurrent.dataset.id,
+        bubbles: true}
+     )
 
-    
-
-      )
-
-      elemCurrent.dispatchEvent(eventRibbonSelect)
-
+       elemCurrent.dispatchEvent(eventRibbonSelect)
+ 
     })
 
     return elem
