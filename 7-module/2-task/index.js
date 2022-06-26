@@ -1,22 +1,24 @@
 import createElement from '../../assets/lib/create-element.js';
 
 export default class Modal {
-  constructor() {
-    this.elem = this.#getInnerElem()
+  
+  #elem = ''
 
+  constructor() {
+    this.#elem = this.#getInnerElem()
   }
 
   open() {
-    let elem = this.elem
+    let elemNew = this.#elem
     let elemBody = document.querySelector('BODY')
     elemBody.classList.add('is-modal-open')
-    elemBody.prepend(elem)
+    elemBody.prepend(elemNew)
 
-    let btnClose = elem.querySelector('.modal__close')
+    let btnClose = elemNew.querySelector('.modal__close')
     
     /* удаление обработчика по ESC */
     btnClose.addEventListener('click', () => {
-      this.#closeModal(elem)
+      this.#closeModal(elemNew)
 
       document.removeEventListener('keydown', this.#closeModalEsc)
     })
@@ -27,8 +29,8 @@ export default class Modal {
   }
 
   setTitle(modalTitle) {
-    let elem = this.elem
-    let elemModaTitle = elem.querySelector('.modal__title')
+    let elemNew = this.#elem
+    let elemModaTitle = elemNew.querySelector('.modal__title')
     elemModaTitle.textContent = modalTitle
   }
 
@@ -70,7 +72,7 @@ export default class Modal {
 
   setBody(elemWindow) {
 
-    let modalBody = this.elem.querySelector('.modal__body')
+    let modalBody = this.#elem.querySelector('.modal__body')
     modalBody.innerHTML = elemWindow.innerHTML
 
   }
@@ -81,7 +83,7 @@ export default class Modal {
     document.removeEventListener('keydown', this.#closeModalEsc)
   }
 
-  /* ЗАкрытие модального окна по внутреннему методуи закрывающей кнопке */
+  /* Закрытие модального окна по внутреннему методуи закрывающей кнопке */
   #closeModal(elemModal) {
 
     elemModal.remove()
