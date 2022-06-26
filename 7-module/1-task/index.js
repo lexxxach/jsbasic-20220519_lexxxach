@@ -3,10 +3,10 @@ import createElement from '../../assets/lib/create-element.js';
 export default class RibbonMenu {
   constructor(categories) {
     this.categories = categories;
-    this.elem = this.#getElem()
+    this.elem = this.#getElem(categories)
   }
 
-  #getElem() {
+  #getElem(cat) {
 
     let elem = this.#innerElem()
     let btnL = elem.querySelector('button.ribbon__arrow_left')
@@ -74,7 +74,7 @@ export default class RibbonMenu {
       /* Генерация пользовательского события */
       let eventRibbonSelect = new CustomEvent(
         'ribbon-select', {
-        detail: {id:elemCurrent.dataset.id},
+        detail: cat[elemCurrent.dataset.id],
         bubbles: true
       }
 
