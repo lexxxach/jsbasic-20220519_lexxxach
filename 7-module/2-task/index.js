@@ -13,7 +13,8 @@ export default class Modal {
     let elemBody = document.querySelector('BODY')
     elemBody.classList.add('is-modal-open')
     let elemContainer = document.querySelector('.container')
-    elemContainer.after(elemNew)
+    //elemContainer.after(elemNew)
+    elemBody.append(elemNew)
 
     let btnClose = elemNew.querySelector('.modal__close')
     
