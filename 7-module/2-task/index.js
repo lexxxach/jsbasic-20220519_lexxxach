@@ -76,7 +76,8 @@ export default class Modal {
   setBody(elemWindow) {
 
     let modalBody = this.#elem.querySelector('.modal__body')
-    modalBody.innerHTML = elemWindow.innerHTML
+    //modalBody.innerHTML = elemWindow.innerHTML
+    modalBody.innerHTML = elemWindow.outerHTML
 
   }
 
