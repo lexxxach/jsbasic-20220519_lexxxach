@@ -112,7 +112,7 @@ export default class StepSlider {
 
       if(!(sliderValueBefore == sliderValueAfter)){
         let custEvent = new CustomEvent('slider-change',{
-        detail:sliderValueAfter,
+        detail:+sliderValueAfter,
         bubbles:true}
         )
         elemBefore.dispatchEvent(custEvent)     
