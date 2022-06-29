@@ -83,6 +83,7 @@ export default class Modal {
 
   close() {
     let elModal = document.querySelector('.modal')
+    if(!elModal) return
     this.#closeModal(elModal)
     document.removeEventListener('keydown', this.#closeModalEsc)
   }
