@@ -1,11 +1,13 @@
 import createElement from '../../assets/lib/create-element.js';
 
 export default class StepSlider {
+  #elemInner = ''
   constructor({ steps, value = 0 }) {
     this.elem = this.#innerElem(steps)
   }
 
-  #innerElem(steps){
+  /* Получение верстки */
+  #innerElem(steps) {
     let elemBefore = createElement(
       `
       <!--Корневой элемент слайдера-->
@@ -32,23 +34,113 @@ export default class StepSlider {
     )
 
     let elemSteps = elemBefore.querySelector('.slider__steps')
-    
-    getElSpan(steps,elemSteps)
-  
-    function getElSpan(stepsFunc,el){
+
+    getElSpan(steps, elemSteps)
+
+    function getElSpan(stepsFunc, el) {
 
       el.innerHTML = ''
 
-      for(let i=0;i<stepsFunc;i++){
+      for (let i = 0; i < stepsFunc; i++) {
         let elemStep = document.createElement('SPAN')
         el.append(elemStep)
       }
 
     }
 
+    /* Обработка событий клика */
+    elemBefore.addEventListener('click', coordProc)
+
+    function coordProc(event) {
+
+      let box = this.getBoundingClientRect()
+      let elLeft = box.left //левый угол
+      let elRight = box.right //правый угол
+      let elWidth = elRight - elLeft //длина элемента
+      let elClick = event.clientX //координаты клика
+      let stepLength = elWidth / (steps - 1) //длина шага
+
+      let arrCoord = []
+      let arrSteps = []
+
+      let arrStep = 0
+      for (let i = elLeft; i <= elRight; i = i + stepLength) {
+        let delta1 = elClick - i
+
+        if (Math.abs(delta1) < stepLength) {
+          arrCoord.push(i)
+        }
+        arrSteps.push(arrStep)
+
+        arrStep++
+
+      }
+
+      let xCoord1 = Math.abs(arrCoord[0] - elClick)
+      let xCoord2 = Math.abs(arrCoord[1] - elClick)
+      let delta2 = Math.min(xCoord1, xCoord2)
+      let sliderCoord
+
+      if (delta2 == xCoord1) {
+        sliderCoord = arrCoord[0]
+      } else if (delta2 == xCoord2) {
+        sliderCoord = arrCoord[1]
+      }
+
+      //alert(sliderCoord)
+
+      let numberStep = 0
+      for (let count of arrSteps) {
+
+
+
+        if ((Math.abs(sliderCoord - (elLeft + count * stepLength))) < 1) {
+          numberStep = count
+          break;
+        }
+
+      }
+
+      let elemSliderValue = document.querySelector('.slider__value')
+      elemSliderValue.textContent = numberStep
+
+      let elemsSpanSliderArr = document.querySelectorAll('.slider__steps SPAN')
+
+      for (let el of elemsSpanSliderArr) {
+        el.removeAttribute('class')
+      }
+      
+      
+      elemsSpanSliderArr[numberStep].classList.add('slider__step-active')
+      
+      /* Обрабокта перемещения позунка */
+      let elThumb = document.querySelector('.slider__thumb')
+      elThumb.setAttribute(`style`, `left:${numberStep * 100 / (steps - 1)}%`)
+      
+
+    }
+
+
+
+
+
+
     return elemBefore
 
   }
+
+
+  #getCoord(elSlider) {
+    let sliderX
+
+    return sliderX
+  }
+
+
+
+
+
+
 
 
 }
