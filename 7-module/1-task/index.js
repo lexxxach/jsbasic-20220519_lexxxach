@@ -78,7 +78,7 @@ export default class RibbonMenu {
         bubbles: true}
      )
 
-       elemCurrent.dispatchEvent(eventRibbonSelect)
+       elemCurrent.dispatchEvent(+eventRibbonSelect)
  
     })
 
