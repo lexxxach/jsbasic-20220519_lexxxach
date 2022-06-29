@@ -14,12 +14,12 @@ export default class StepSlider {
   <div class="slider">
 
     <!--Ползунок слайдера с активным значением-->
-    <div class="slider__thumb" style="left: 50%;">
-      <span class="slider__value">2</span>
+    <div class="slider__thumb" style="left: 0%;">
+      <span class="slider__value">0</span>
     </div>
 
     <!--Заполненная часть слайдера-->
-    <div class="slider__progress" style="width: 50%;"></div>
+    <div class="slider__progress" style="width: 0%;"></div>
 
     <!--Шаги слайдера-->
     <div class="slider__steps">
@@ -43,6 +43,9 @@ export default class StepSlider {
 
       for (let i = 0; i < stepsFunc; i++) {
         let elemStep = document.createElement('SPAN')
+        if(i==0){
+          elemStep.classList.add('slider__step-active')
+        }
         el.append(elemStep)
       }
 
@@ -113,12 +116,21 @@ export default class StepSlider {
       
       elemsSpanSliderArr[numberStep].classList.add('slider__step-active')
       
-      /* Обрабокта перемещения позунка */
-      let elThumb = document.querySelector('.slider__thumb')
-      elThumb.setAttribute(`style`, `left:${numberStep * 100 / (steps - 1)}%`)
-      
+        let progress = numberStep * 100 / (steps - 1)
+
+        /* Обрабокта перемещения позунка */
+      let elThumb = elemBefore.querySelector('.slider__thumb')
+      elThumb.style.left = `${progress}%`
+
+      /* Обработка ширины закрашиваемой области */
+      let elThumbArea = elemBefore.querySelector('.slider__progress')
+      elThumbArea.style.width = `${progress}%`
+        
+
 
     }
+
+    
 
 
 
