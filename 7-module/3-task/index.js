@@ -62,6 +62,7 @@ export default class StepSlider {
       let elWidth = elRight - elLeft //длина элемента
       let elClick = event.clientX //координаты клика
       let stepLength = elWidth / (steps - 1) //длина шага
+      
 
       let arrCoord = []
       let arrSteps = []
@@ -105,7 +106,20 @@ export default class StepSlider {
       }
 
       let elemSliderValue = document.querySelector('.slider__value')
+      let sliderValueBefore = elemSliderValue.textContent
       elemSliderValue.textContent = numberStep
+      let sliderValueAfter = elemSliderValue.textContent
+
+      if(!(sliderValueBefore == sliderValueAfter)){
+        let custEvent = new CustomEvent('slider-change',{
+        detail:sliderValueAfter,
+        bubbles:true}
+        )
+        elemBefore.dispatchEvent(custEvent)     
+
+      }
+
+      
 
       let elemsSpanSliderArr = document.querySelectorAll('.slider__steps SPAN')
 
