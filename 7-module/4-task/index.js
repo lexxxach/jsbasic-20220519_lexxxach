@@ -226,7 +226,9 @@ export default class StepSlider {
 
       //  alert(currentStepSlider)
 
-        if (valuSliderBefore == +currentStepSlider){
+        if (valuSliderBefore != +currentStepSlider){
+
+          
 
           let userEvent =  new CustomEvent('slider-change', { 
             detail: +currentStepSlider, // значение 0, 1, 2, 3, 4
