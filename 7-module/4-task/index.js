@@ -228,8 +228,6 @@ export default class StepSlider {
 
         if (valuSliderBefore != +currentStepSlider){
 
-          
-
           let userEvent =  new CustomEvent('slider-change', { 
             detail: +currentStepSlider, // значение 0, 1, 2, 3, 4
             bubbles: true 
