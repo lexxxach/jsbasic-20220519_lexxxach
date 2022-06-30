@@ -156,6 +156,8 @@ export default class StepSlider {
 
       elemBefore.removeEventListener('click', coordProc)
 
+      elemBefore.classList.add('slider_dragging')
+
 
       function move(event) {
         if (!event1.target.closest('.slider__thumb')) return
@@ -164,7 +166,7 @@ export default class StepSlider {
       let elThumbArea = elemBefore.querySelector('.slider__progress')
       
 
-        elemBefore.classList.add('slider_dragging')
+       // elemBefore.classList.add('slider_dragging')
 
         let currentCoord = event.clientX - deltaSlider
         let currentLeft = currentCoord * 100 / elemBefore.offsetWidth
@@ -203,6 +205,7 @@ export default class StepSlider {
 
         document.removeEventListener('mousemove', move)
         elemBefore.classList.remove('slider_dragging')
+        
         elemBefore.addEventListener('click', coordProc)
 
         
