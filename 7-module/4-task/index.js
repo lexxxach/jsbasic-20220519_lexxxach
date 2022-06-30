@@ -148,7 +148,7 @@ export default class StepSlider {
 
   
 
-    elemBefore.addEventListener('mousedown', function (event1) {
+    elemBefore.addEventListener('pointerdown', function (event1) {
 
       //let startValue = getBoundingClientRect().left
 
@@ -197,11 +197,11 @@ export default class StepSlider {
 
       }
 
-      document.addEventListener('mousemove', move)
+      document.addEventListener('pointermove', move)
 
-      document.addEventListener('mouseup', function (event2) {
+      document.addEventListener('pointerup', function (event2) {
 
-        document.removeEventListener('mousemove', move)
+        document.removeEventListener('pointermove', move)
         let coordSlider = event2.clientX
         
         
