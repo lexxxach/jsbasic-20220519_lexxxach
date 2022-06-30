@@ -231,10 +231,9 @@ export default class StepSlider {
           
         }
         elSlSteps[currentStepSlider].classList.add('slider__step-active')
-       
-        
+             
         elemBefore.classList.remove('slider_dragging')
-        
+       
               
       })
 
