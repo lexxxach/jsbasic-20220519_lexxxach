@@ -46,7 +46,7 @@ export default class StepSlider {
     }
 
     /* Обработка событий клика */
-    elemBefore.addEventListener('click', coordProc)
+    //elemBefore.addEventListener('click', coordProc)
 
     function coordProc(event) {
 
@@ -139,6 +139,7 @@ export default class StepSlider {
 
     /* Отключение обработки перемещения по умолчанию */
     let elThumb = elemBefore.querySelector('.slider__thumb')
+    let elThumbArea = elemBefore.querySelector('.slider__progress')
     elThumb.ondragstart = function () {
       return false
     }
@@ -150,24 +151,30 @@ export default class StepSlider {
 
     elemBefore.addEventListener('mousedown', function (event1) {
 
-      if (!event1.target.closest('.slider__thumb')) return
+      //let startValue = getBoundingClientRect().left
 
       let deltaSlider = elemBefore.getBoundingClientRect().left
+      let currentCoordSlider = (x,y)=> (x-y)*100/elemBefore.offsetWidth //кординаты в %
+      let pastCoordSlider = (x,y) => (steps-1) * currentCoordSlider(x,y)/100
+      
+      elThumb.style.left = currentCoordSlider(event1.clientX,deltaSlider) + '%'  
+      elThumbArea.style.width = currentCoordSlider(event1.clientX,deltaSlider) + '%'    
+      let coordSlider = event1.clientX
+              
+        let currentStepSlider = Math.round(pastCoordSlider(coordSlider,deltaSlider))
+        let elThumbSpan = elThumb.querySelector('SPAN')
+        elThumbSpan.textContent = currentStepSlider
 
-      elemBefore.removeEventListener('click', coordProc)
+
+    //  elemBefore.removeEventListener('click', coordProc)
 
       elemBefore.classList.add('slider_dragging')
 
-
       function move(event) {
+        
         if (!event1.target.closest('.slider__thumb')) return
 
         /* Обработка ширины закрашиваемой области */
-      let elThumbArea = elemBefore.querySelector('.slider__progress')
-      
-
-       // elemBefore.classList.add('slider_dragging')
-
         let currentCoord = event.clientX - deltaSlider
         let currentLeft = currentCoord * 100 / elemBefore.offsetWidth
 
@@ -180,35 +187,55 @@ export default class StepSlider {
           elThumbArea.style.width = `100%`
         }
         else {
-          elThumb.style.left = `${currentLeft}%`
-          elThumbArea.style.width = `${currentLeft}%`
+          elThumb.style.left = `${currentCoordSlider(event.clientX,deltaSlider)}%`
+          elThumbArea.style.width = `${currentCoordSlider(event.clientX,deltaSlider)}%`
+          let coordSlider = event.clientX
+              
+        let currentStepSlider = Math.round(pastCoordSlider(coordSlider,deltaSlider))
+        let elThumbSpan = elThumb.querySelector('SPAN')
+        elThumbSpan.textContent = currentStepSlider
         }
 
       }
 
       document.addEventListener('mousemove', move)
 
-
       document.addEventListener('mouseup', function (event2) {
 
-        let trg = elemBefore.querySelector('.slider__thumb')
+        /* let trg = elemBefore.querySelector('.slider__thumb')
         let cordClck = trg.clientX
         let btn = trg
         let numberStep = getNumberStep(btn, cordClck) //номер шага
 
-        let elemsSpanSliderArr = elemBefore.querySelectorAll('.slider__steps SPAN')
+        let elemsSpanSliderArr = elemBefore.querySelectorAll('.slider__steps SPAN') */
       /* Обработка активного SPAN */
-      for (let el of elemsSpanSliderArr) {
+     /*  for (let el of elemsSpanSliderArr) {
         el.removeAttribute('class')
       }
       elemsSpanSliderArr[numberStep].classList.add('slider__step-active')
-
+ */
         document.removeEventListener('mousemove', move)
+        let coordSlider = event2.clientX
+        
+        
+        
+        let currentStepSlider = Math.round(pastCoordSlider(coordSlider,deltaSlider))
+        
+        elThumb.style.left = Math.round(pastCoordSlider(coordSlider,deltaSlider))*100/(steps-1) +'%'
+        let elThumbSpan = elThumb.querySelector('SPAN')
+        elThumbSpan.textContent = currentStepSlider
+        elThumbArea.style.width = Math.round(pastCoordSlider(coordSlider,deltaSlider))*100/(steps-1) +'%'
+        let elSlSteps = elemBefore.querySelectorAll('.slider__steps SPAN')
+        for(let elemCurrentStep of elSlSteps){
+          elemCurrentStep.removeAttribute('class')
+          
+        }
+        elSlSteps[currentStepSlider].classList.add('slider__step-active')
+       
+        
         elemBefore.classList.remove('slider_dragging')
         
-        elemBefore.addEventListener('click', coordProc)
-
-        
+              
       })
 
    })
