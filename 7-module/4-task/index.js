@@ -152,6 +152,8 @@ export default class StepSlider {
 
       //let startValue = getBoundingClientRect().left
 
+      let valuSliderBefore = +elemBefore.querySelector('.slider__value').textContent
+
       let deltaSlider = elemBefore.getBoundingClientRect().left
       let currentCoordSlider = (x,y)=> (x-y)*100/elemBefore.offsetWidth //кординаты в %
       let pastCoordSlider = (x,y) => (steps-1) * currentCoordSlider(x,y)/100
@@ -222,14 +224,19 @@ export default class StepSlider {
              
         elemBefore.classList.remove('slider_dragging')
 
-        alert(currentStepSlider)
+      //  alert(currentStepSlider)
 
-        let userEvent =  new CustomEvent('slider-change', { 
-          detail: +currentStepSlider, // значение 0, 1, 2, 3, 4
-          bubbles: true 
-          })
+        if (valuSliderBefore == +currentStepSlider){
 
-        elemBefore.dispatchEvent(userEvent)
+          let userEvent =  new CustomEvent('slider-change', { 
+            detail: +currentStepSlider, // значение 0, 1, 2, 3, 4
+            bubbles: true 
+            })
+  
+          elemBefore.dispatchEvent(userEvent)
+        }
+
+        
 
       }
 
