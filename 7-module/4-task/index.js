@@ -60,14 +60,14 @@ export default class StepSlider {
       let sliderValueAfter = elemSliderValue.textContent
 
       /* Условие подписки на событие */
-     /*  if (!(sliderValueBefore == sliderValueAfter)) {
+      if (!(sliderValueBefore == sliderValueAfter)) {
         let custEvent = new CustomEvent('slider-change', {
           detail: +sliderValueAfter,
           bubbles: true
         }
         )
         elemBefore.dispatchEvent(custEvent)
-      } */
+      }
 
       let elemsSpanSliderArr = document.querySelectorAll('.slider__steps SPAN')
       /* Обработка активного SPAN */
@@ -137,6 +137,8 @@ export default class StepSlider {
       return numberStep
     }
 
+    /* Drag & Drop */
+  
     /* Отключение обработки перемещения по умолчанию */
     let elThumb = elemBefore.querySelector('.slider__thumb')
     let elThumbArea = elemBefore.querySelector('.slider__progress')
@@ -144,7 +146,7 @@ export default class StepSlider {
       return false
     }
 
-    /* Drag & Drop */
+  /* Обработка событий мыши */
     elemBefore.addEventListener('pointerdown', function (event1) {
 
       let valuSliderBefore = +elemBefore.querySelector('.slider__value').textContent //значение до перемещения
@@ -206,14 +208,16 @@ export default class StepSlider {
         elThumbSpan.textContent = currentStepSlider
         elThumbArea.style.width = Math.round(pastCoordSlider(coordSlider, deltaSlider)) * 100 / (steps - 1) + '%'
         let elSlSteps = elemBefore.querySelectorAll('.slider__steps SPAN')
+        
+        /* Обработка и добавление класса в SPAN шагов */
         for (let elemCurrentStep of elSlSteps) {
           elemCurrentStep.removeAttribute('class')
-
         }
         elSlSteps[currentStepSlider].classList.add('slider__step-active')
 
         elemBefore.classList.remove('slider_dragging')
 
+        /* Пользовательское событие */
         if (!(valuSliderBefore == +currentStepSlider)) {
 
           let userEvent = new CustomEvent('slider-change', {
