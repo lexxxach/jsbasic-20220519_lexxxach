@@ -61,12 +61,12 @@ export default class StepSlider {
 
       /* Условие подписки на событие */
       if (!(sliderValueBefore == sliderValueAfter)) {
-        let custEvent = new CustomEvent('slider-change', {
+        /* let custEvent = new CustomEvent('slider-change', {
           detail: +sliderValueAfter,
           bubbles: true
         }
         )
-        elemBefore.dispatchEvent(custEvent)
+        elemBefore.dispatchEvent(custEvent) */
       }
 
       let elemsSpanSliderArr = document.querySelectorAll('.slider__steps SPAN')
@@ -221,10 +221,10 @@ export default class StepSlider {
              
         elemBefore.classList.remove('slider_dragging')
 
-        let userEvent =  new CustomEvent('slider-change', { // имя события должно быть именно 'slider-change'
-          detail: currentStepSlider, // значение 0, 1, 2, 3, 4
-          bubbles: true // событие всплывает - это понадобится в дальнейшем
-        })
+        let userEvent =  new CustomEvent('slider-change', { 
+          detail: +currentStepSlider, // значение 0, 1, 2, 3, 4
+          bubbles: true 
+          })
 
         elemBefore.dispatchEvent(userEvent)
        
