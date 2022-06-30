@@ -137,6 +137,8 @@ export default class StepSlider {
       return numberStep
     }
 
+
+    
     /* Отключение обработки перемещения по умолчанию */
     let elThumb = elemBefore.querySelector('.slider__thumb')
     let elThumbArea = elemBefore.querySelector('.slider__progress')
@@ -144,10 +146,7 @@ export default class StepSlider {
       return false
     }
 
-    elemBefore.ondragstart = function () {
-      return false
-    }
-
+  
 
     elemBefore.addEventListener('mousedown', function (event1) {
 
@@ -202,18 +201,6 @@ export default class StepSlider {
 
       document.addEventListener('mouseup', function (event2) {
 
-        /* let trg = elemBefore.querySelector('.slider__thumb')
-        let cordClck = trg.clientX
-        let btn = trg
-        let numberStep = getNumberStep(btn, cordClck) //номер шага
-
-        let elemsSpanSliderArr = elemBefore.querySelectorAll('.slider__steps SPAN') */
-      /* Обработка активного SPAN */
-     /*  for (let el of elemsSpanSliderArr) {
-        el.removeAttribute('class')
-      }
-      elemsSpanSliderArr[numberStep].classList.add('slider__step-active')
- */
         document.removeEventListener('mousemove', move)
         let coordSlider = event2.clientX
         
@@ -222,7 +209,7 @@ export default class StepSlider {
         let currentStepSlider = Math.round(pastCoordSlider(coordSlider,deltaSlider))
         
         elThumb.style.left = Math.round(pastCoordSlider(coordSlider,deltaSlider))*100/(steps-1) +'%'
-        let elThumbSpan = elThumb.querySelector('SPAN')
+        let elThumbSpan = elThumb.querySelector('.slider__value')
         elThumbSpan.textContent = currentStepSlider
         elThumbArea.style.width = Math.round(pastCoordSlider(coordSlider,deltaSlider))*100/(steps-1) +'%'
         let elSlSteps = elemBefore.querySelectorAll('.slider__steps SPAN')
@@ -239,7 +226,7 @@ export default class StepSlider {
 
    })
 
-    return elemBefore
+   return elemBefore
   }
 
 }

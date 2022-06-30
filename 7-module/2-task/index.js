@@ -12,7 +12,7 @@ export default class Modal {
     let elemNew = this.#elem
     let elemBody = document.querySelector('BODY')
     elemBody.classList.add('is-modal-open')
-    let elemContainer = document.querySelector('.container')
+   // let elemContainer = document.querySelector('.container')
     //elemContainer.after(elemNew)
     elemBody.append(elemNew)
 
