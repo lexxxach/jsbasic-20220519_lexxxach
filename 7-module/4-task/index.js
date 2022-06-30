@@ -60,14 +60,14 @@ export default class StepSlider {
       let sliderValueAfter = elemSliderValue.textContent
 
       /* Условие подписки на событие */
-      if (!(sliderValueBefore == sliderValueAfter)) {
+     /*  if (!(sliderValueBefore == sliderValueAfter)) {
         let custEvent = new CustomEvent('slider-change', {
           detail: +sliderValueAfter,
           bubbles: true
         }
         )
         elemBefore.dispatchEvent(custEvent)
-      }
+      } */
 
       let elemsSpanSliderArr = document.querySelectorAll('.slider__steps SPAN')
       /* Обработка активного SPAN */
@@ -144,31 +144,27 @@ export default class StepSlider {
       return false
     }
 
+    /* Drag & Drop */
     elemBefore.addEventListener('pointerdown', function (event1) {
 
-      //let startValue = getBoundingClientRect().left
-
-      let valuSliderBefore = +elemBefore.querySelector('.slider__value').textContent
+      let valuSliderBefore = +elemBefore.querySelector('.slider__value').textContent //значение до перемещения
 
       let deltaSlider = elemBefore.getBoundingClientRect().left
-      let currentCoordSlider = (x,y)=> (x-y)*100/elemBefore.offsetWidth //кординаты в %
-      let pastCoordSlider = (x,y) => (steps-1) * currentCoordSlider(x,y)/100
-      
-      elThumb.style.left = currentCoordSlider(event1.clientX,deltaSlider) + '%'  
-      elThumbArea.style.width = currentCoordSlider(event1.clientX,deltaSlider) + '%'    
+      let currentCoordSlider = (x, y) => (x - y) * 100 / elemBefore.offsetWidth //кординаты в %
+      let pastCoordSlider = (x, y) => (steps - 1) * currentCoordSlider(x, y) / 100
+
+      elThumb.style.left = currentCoordSlider(event1.clientX, deltaSlider) + '%'
+      elThumbArea.style.width = currentCoordSlider(event1.clientX, deltaSlider) + '%'
       let coordSlider = event1.clientX
-              
-        let currentStepSlider = Math.round(pastCoordSlider(coordSlider,deltaSlider))
-        let elThumbSpan = elThumb.querySelector('SPAN')
-        elThumbSpan.textContent = currentStepSlider
 
-
-    //  elemBefore.removeEventListener('click', coordProc)
+      let currentStepSlider = Math.round(pastCoordSlider(coordSlider, deltaSlider))
+      let elThumbSpan = elThumb.querySelector('SPAN')
+      elThumbSpan.textContent = currentStepSlider
 
       elemBefore.classList.add('slider_dragging')
 
       function move(event) {
-        
+
         if (!event1.target.closest('.slider__thumb')) return
 
         /* Обработка ширины закрашиваемой области */
@@ -184,56 +180,54 @@ export default class StepSlider {
           elThumbArea.style.width = `100%`
         }
         else {
-          elThumb.style.left = `${currentCoordSlider(event.clientX,deltaSlider)}%`
-          elThumbArea.style.width = `${currentCoordSlider(event.clientX,deltaSlider)}%`
+          elThumb.style.left = `${currentCoordSlider(event.clientX, deltaSlider)}%`
+          elThumbArea.style.width = `${currentCoordSlider(event.clientX, deltaSlider)}%`
           let coordSlider = event.clientX
-              
-        let currentStepSlider = Math.round(pastCoordSlider(coordSlider,deltaSlider))
-        let elThumbSpan = elThumb.querySelector('SPAN')
-        elThumbSpan.textContent = currentStepSlider
+
+          let currentStepSlider = Math.round(pastCoordSlider(coordSlider, deltaSlider))
+          let elThumbSpan = elThumb.querySelector('SPAN')
+          elThumbSpan.textContent = currentStepSlider
         }
 
       }
 
       document.addEventListener('pointermove', move)
 
-      document.addEventListener('pointerup', pointerUp, {once:true})
+      document.addEventListener('pointerup', pointerUp, { once: true })
 
-      function pointerUp(event2){
+      function pointerUp(event2) {
         document.removeEventListener('pointermove', move)
         let coordSlider = event2.clientX
-          
-        let currentStepSlider = Math.round(pastCoordSlider(coordSlider,deltaSlider))
-        
-        elThumb.style.left = Math.round(pastCoordSlider(coordSlider,deltaSlider))*100/(steps-1) +'%'
+
+        let currentStepSlider = Math.round(pastCoordSlider(coordSlider, deltaSlider))
+
+        elThumb.style.left = Math.round(pastCoordSlider(coordSlider, deltaSlider)) * 100 / (steps - 1) + '%'
         let elThumbSpan = elThumb.querySelector('.slider__value')
         elThumbSpan.textContent = currentStepSlider
-        elThumbArea.style.width = Math.round(pastCoordSlider(coordSlider,deltaSlider))*100/(steps-1) +'%'
+        elThumbArea.style.width = Math.round(pastCoordSlider(coordSlider, deltaSlider)) * 100 / (steps - 1) + '%'
         let elSlSteps = elemBefore.querySelectorAll('.slider__steps SPAN')
-        for(let elemCurrentStep of elSlSteps){
+        for (let elemCurrentStep of elSlSteps) {
           elemCurrentStep.removeAttribute('class')
-          
+
         }
         elSlSteps[currentStepSlider].classList.add('slider__step-active')
-             
+
         elemBefore.classList.remove('slider_dragging')
 
-      //  alert(currentStepSlider)
+        if (!(valuSliderBefore == +currentStepSlider)) {
 
-         if (!(valuSliderBefore == +currentStepSlider)){
-
-          let userEvent =  new CustomEvent('slider-change', { 
+          let userEvent = new CustomEvent('slider-change', {
             detail: +currentStepSlider, // значение 0, 1, 2, 3, 4
-            bubbles: true 
-            })
-  
+            bubbles: true
+          })
+
           elemBefore.dispatchEvent(userEvent)
-        } 
+        }
       }
 
-   })
+    })
 
-   return elemBefore
+    return elemBefore
   }
 
 }
