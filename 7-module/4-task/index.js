@@ -46,7 +46,7 @@ export default class StepSlider {
     }
 
     /* Обработка событий клика */
-    //elemBefore.addEventListener('click', coordProc)
+    elemBefore.addEventListener('click', coordProc)
 
     function coordProc(event) {
 
@@ -138,7 +138,7 @@ export default class StepSlider {
     }
 
 
-    
+
     /* Отключение обработки перемещения по умолчанию */
     let elThumb = elemBefore.querySelector('.slider__thumb')
     let elThumbArea = elemBefore.querySelector('.slider__progress')
