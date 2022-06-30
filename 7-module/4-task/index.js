@@ -220,6 +220,13 @@ export default class StepSlider {
         elSlSteps[currentStepSlider].classList.add('slider__step-active')
              
         elemBefore.classList.remove('slider_dragging')
+
+        let userEvent =  new CustomEvent('slider-change', { // имя события должно быть именно 'slider-change'
+          detail: currentStepSlider, // значение 0, 1, 2, 3, 4
+          bubbles: true // событие всплывает - это понадобится в дальнейшем
+        })
+
+        elemBefore.dispatchEvent(userEvent)
        
               
       })
