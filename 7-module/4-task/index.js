@@ -61,12 +61,12 @@ export default class StepSlider {
 
       /* Условие подписки на событие */
       if (!(sliderValueBefore == sliderValueAfter)) {
-        /* let custEvent = new CustomEvent('slider-change', {
+        let custEvent = new CustomEvent('slider-change', {
           detail: +sliderValueAfter,
           bubbles: true
         }
         )
-        elemBefore.dispatchEvent(custEvent) */
+        elemBefore.dispatchEvent(custEvent)
       }
 
       let elemsSpanSliderArr = document.querySelectorAll('.slider__steps SPAN')
@@ -199,8 +199,9 @@ export default class StepSlider {
 
       document.addEventListener('pointermove', move)
 
-      document.addEventListener('pointerup', function (event2) {
+      document.addEventListener('pointerup', pointerUp, {once:true})
 
+      function pointerUp(event2){
         document.removeEventListener('pointermove', move)
         let coordSlider = event2.clientX
         
@@ -221,15 +222,16 @@ export default class StepSlider {
              
         elemBefore.classList.remove('slider_dragging')
 
+        alert(currentStepSlider)
+
         let userEvent =  new CustomEvent('slider-change', { 
           detail: +currentStepSlider, // значение 0, 1, 2, 3, 4
           bubbles: true 
           })
 
         elemBefore.dispatchEvent(userEvent)
-       
-              
-      })
+
+      }
 
    })
 
