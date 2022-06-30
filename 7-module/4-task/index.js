@@ -137,16 +137,12 @@ export default class StepSlider {
       return numberStep
     }
 
-
-
     /* Отключение обработки перемещения по умолчанию */
     let elThumb = elemBefore.querySelector('.slider__thumb')
     let elThumbArea = elemBefore.querySelector('.slider__progress')
     elThumb.ondragstart = function () {
       return false
     }
-
-  
 
     elemBefore.addEventListener('pointerdown', function (event1) {
 
@@ -206,9 +202,7 @@ export default class StepSlider {
       function pointerUp(event2){
         document.removeEventListener('pointermove', move)
         let coordSlider = event2.clientX
-        
-        
-        
+          
         let currentStepSlider = Math.round(pastCoordSlider(coordSlider,deltaSlider))
         
         elThumb.style.left = Math.round(pastCoordSlider(coordSlider,deltaSlider))*100/(steps-1) +'%'
@@ -226,7 +220,7 @@ export default class StepSlider {
 
       //  alert(currentStepSlider)
 
-      /*   if (valuSliderBefore != +currentStepSlider){
+         if (!(valuSliderBefore == +currentStepSlider)){
 
           let userEvent =  new CustomEvent('slider-change', { 
             detail: +currentStepSlider, // значение 0, 1, 2, 3, 4
@@ -234,10 +228,7 @@ export default class StepSlider {
             })
   
           elemBefore.dispatchEvent(userEvent)
-        } */
-
-        
-
+        } 
       }
 
    })
