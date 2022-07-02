@@ -41,8 +41,12 @@ export default class CartIcon {
   }
 
   updatePosition() {
+
     let el = this.elem
-    
+
+
+    if (!el.offsetWidth) return
+
     if (this.#offSet < window.pageYOffset) {
 
       if (document.documentElement.clientWidth > 767) {
@@ -52,27 +56,33 @@ export default class CartIcon {
         let coordRightBorder = elContainer.getBoundingClientRect().right //правая часть элемента
         let windowWidth = document.documentElement.clientWidth //ширина окна
 
-        if (coordRightBorder + 20 <= windowWidth - el.offsetWidth - 10) {
+        console.log(`${coordRightBorder + 20} +20
+        ${windowWidth - el.offsetWidth - 10} -10`)
+
+
+        if (coordRightBorder + 20 < windowWidth - el.offsetWidth - 10) {
           el.style.left = coordRightBorder + 20 + 'px'
         }
         else {
           el.style.left = windowWidth - el.offsetWidth - 10 + 'px'
+         // el.style.right = '10px'
           el.style.zIndex = 1000
+
         }
       }
       else {
 
-        Object.assign(this.elem.style,{
+        alert(799)
+        Object.assign(this.elem.style, {
           position: '',
           top: '',
           left: '',
           zIndex: ''
         })
-        
+
       }
-    }else
-    {
-      Object.assign(this.elem.style,{
+    } else {
+      Object.assign(this.elem.style, {
         position: '',
         top: '',
         left: '',
@@ -82,4 +92,5 @@ export default class CartIcon {
     }
 
   }
+
 }
